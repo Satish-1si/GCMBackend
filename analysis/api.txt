@@ -1,0 +1,3 @@
+
+signUp    :- username || email || phoneNO            ====>(post)
+verify    :- Otp 

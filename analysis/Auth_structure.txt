@@ -1,0 +1,154 @@
+
+/signup:- (post)
+   1.Username              : string (R) ---> (DB)
+   2.Email                 : string (R) ---> (DB)
+   3.Password              : string (R) ---> (DB)
+   4.ConformPassword       : string (R) ---> (DB)
+   5.Full Name             : String (R) ---> (DB)
+
+/verify otp (email) :- (post) ==>modes
+   1. otp  (R)             : number   --> !(DB)
+   
+/modes scress -->mode_1 || mode_2 || mode_3
+
+* mode_1:- Direct access
+* mode_2:- domainID && password 
+* mode_3:- password && extension
+
+/*signup*/
+route.post("/signup").post((req,res,next)=>Authcontrollers?.signup(req,res,next)) <---"no node"
+
+/*verOtp==>protected-->VerifyOtp-->Mode_1*/
+route.post("/verifyOtp").post((req,res,next)=>Authcontrollers?.protected(req,res,next),
+                              (req,res,next)=>Authcontrollers?.VerifyOtp(req,res,next),
+                              (req,res,next)=>Authcontrollers?.Mode(req,res,next),<---["MODE_1"]
+                              )
+
+/*login==>protected-->login-->Mode*/
+route.post("/login").post(
+                           (req,res,next)=>Authcontrollers?.protected(req,res,next),
+                           (req,res,next)=>Authcontrollers?.login(req,res,next),
+                           (req,res,next)=>Authcontrollers?.Mode(req,res,next),)<---["MODE_1 MODE_2"]
+                         )
+
+route.post("/mode").post((req,res,next)=>Authcontrollers?.protected(req,res,next),
+                         (req,res,next)=>Authcontrollers?.Mode(req,res,next),<---["any mode"]
+                         )
+
+
+
+
+/signup ==>  userDetails (post) --> 1.email <===token 
+/verify otp ==> email otp  --> [mode_1]
+
+Today working on 
+1.changes in sales payment module 
+2.changes in patientHistory module batch and quatity
+3.reslove the git cofits in beta and CD 
+ 
+
+ /********************************************************************/
+
+ 1.sumsung --> signup-->login --> mode_1 (satish)
+ 2.iphone  --> login(email,psd) --> model_1:- changescren--> mode_3 (satish)
+
+ mode:mode_1 ==>samsung (satish)                                
+ mode:mode_1 ==>iphone --> changescren ---> mode_3(switch) ==>mode:mode:3(satish)
+ ........................................................................
+ mode:mode3
+
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************signup***********************************/
+curl --location 'http://localhost:3500/gcm/signup' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzU5OCwiZXhwIjoxNzIxMzk5OTk4fQ._TjRfRlPCYDOIEQFs0BT8yswS0CyGmHtjfcCRmv0sOg' \
+--data-raw '{
+    "username":"manju",
+    "email":"gudipatimanju@gmail.com",
+    "password":"ga@135nm1"(p),
+    "conformPassword":"ga@135nm1"(p),
+    "mobileno":"7997704765"
+}'
+
+ {
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzU5OCwiZXhwIjoxNzIxMzk5OTk4fQ._TjRfRlPCYDOIEQFs0BT8yswS0CyGmHtjfcCRmv0sOg",
+    "data": {
+        "username": "manju",
+        "email": "gudipatimanju@gmail.com",
+        "IsActive": true,
+        "sendOtp": "131824",
+        "role": [],
+        "_id": "6699293bfb5c9a9b1f847d62",
+        "__v": 0
+    }
+}
+/****************************************************VerifyOtp*********************************/
+
+curl --location 'http://localhost:3500/gcm/verifyOtp' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzU5OCwiZXhwIjoxNzIxMzk5OTk4fQ._TjRfRlPCYDOIEQFs0BT8yswS0CyGmHtjfcCRmv0sOg' \
+--data '{
+    "verifyOtp":"131824"
+}'
+
+{
+    "status": "Unknown UserInput",
+    "message": "please enter the valid otp",
+    "stack": "customError: please enter the valid otp\n    at C:\\Users\\satis\\OneDrive\\Desktop\\AdminPanel\\backend\\controllers\\AuthController\\verifyOtp.js:21:14\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
+    "error": {
+        "statusCode": 400,
+        "status": "Unknown UserInput",
+        "isOperational": true,
+        "name": "customError"
+    }
+}
+/**************************************************login***********************************/
+curl --location 'http://localhost:3500/gcm/login' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzU5OCwiZXhwIjoxNzIxMzk5OTk4fQ._TjRfRlPCYDOIEQFs0BT8yswS0CyGmHtjfcCRmv0sOg' \
+--data-raw '{
+    "email":"gudipatimanju@gmail.com",
+    "password":"ga@135nm1"
+}'
+
+{
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzk1NiwiZXhwIjoxNzIxNDAwMzU2fQ.eyh75KzBImo1KDeXp6K_DKvT1sMehQ0HmzZGYT_RU4Y",
+    "data": {
+        "_id": "6699293bfb5c9a9b1f847d62",
+        "username": "manju",
+        "email": "gudipatimanju@gmail.com",
+        "role": [
+            "mode3",
+            "mode1"
+        ],
+        "__v": 0
+    }
+}
+/**************************************************mode-1,2,3***********************************/
+curl --location --request POST 'http://localhost:3500/gcm/ModeThree' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzk1NiwiZXhwIjoxNzIxNDAwMzU2fQ.eyh75KzBImo1KDeXp6K_DKvT1sMehQ0HmzZGYT_RU4Y'
+
+{
+    "status": "success",
+    "data": {
+        "_id": "6699293bfb5c9a9b1f847d62",
+        "username": "manju",
+        "email": "gudipatimanju@gmail.com",
+        "role": [
+            "mode3"
+        ],
+        "__v": 0
+    }
+}
