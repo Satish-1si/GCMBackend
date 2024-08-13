@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const moment=require("moment")
 const Bcrypt=require("bcryptjs")
 const OTP_SCHEMA=require("./OtpModel")
-const ModesSchema=require("./Mode")
 const userSchema = new mongoose.Schema({
     username: {type: String, required: true},
     email: {
@@ -27,18 +26,9 @@ const userSchema = new mongoose.Schema({
       select:false
     },
     ActiveMode:{
-      type:String,
-      validate: {
-        validator: function(value) {
-          return ["MODE_ONE","MODE_TWO","MODE_THREE"].includes(value);
-        },
-        message: "unKnow Mode !!! please verify!!!"
-      },
-      select:false
-    },
-
-  
-  },{timestamps:true});
+       type:String
+    }
+},{timestamps:true});
   
 //Hash the ==> new || modied passwords
 userSchema.pre("save",async function (next){

@@ -31,7 +31,6 @@ module.exports.ProtectedController = AsyncErrorHandler(async (req, res, next) =>
         return next(new CustomError("Please register!!!", 404));
     }
     
-    // Uncomment and implement token expiration check if needed
     // const isTokenValid = await UserDoc.verifyTokenExpiredDate(UserDetails);
     // if (!isTokenValid) return next(new CustomError("Token expired, please login again", 401));
     

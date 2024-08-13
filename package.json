@@ -4,8 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "dev": "set NODE_ENV=Development && set PORT=9001 &&  nodemon server.js",
+     "pro": "set NODE_ENV=Production && set PORT=9009 && nodemon server.js"
+
+    },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -22,7 +25,9 @@
     "moongose": "^1.0.0",
     "morgan": "^1.10.0",
     "nanoid": "^3.1.20",
-    "nodemailer": "^6.9.14",
+    "nodemailer": "^6.9.14"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.4"
   }
 }

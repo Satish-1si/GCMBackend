@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const AllowPermissionsSchema = require('./AllowPermissions');
 
-const ModeTwoSchema = new mongoose.Schema({
+const AdminAddUsersSchema = new mongoose.Schema({
   email: {
     type: String,
     lowercase: true,
@@ -47,6 +47,6 @@ const ModeTwoSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-const ModeTwoModel = mongoose.model("ModeTwo", ModeTwoSchema);
-module.exports = ModeTwoModel;
+const AdminAddUsers = mongoose.model("ModeTwo", AdminAddUsersSchema);
+module.exports = AdminAddUsers;
 

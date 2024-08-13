@@ -8,30 +8,26 @@ const {
         ProtectedController,
         ForgetPasswordController,
         ReSendOtpController,
-        ModeOne,ModeTwo,ModeThree
+        Mode
       }=AllControllers
 
 /* signup */
 Router.route("/signup").post(SignupController)
 
-/* verifyRoute */
+/* verifyRoute ==>using Register token ==> to pass login Details */
 Router.route("/verifyOtp").post(ProtectedController,VerifyOtpController)
 
 /*ReverifyRoute */
 Router.route("/resendOtp").post(ProtectedController,ReSendOtpController)
 
-/* login */
-Router.route("/login").post(ProtectedController,LoginController)
+/* login ==>using Register token ==> to pass login Details*/
+Router.route("/login").post(LoginController)
 
 /* ForgetPassword */
 Router.route("/forgetPassword").post(ProtectedController,ForgetPasswordController)
 
 /*Mode1 */
-Router.route("/ModeOne").post(ProtectedController,ModeOne)
-/*Mode2 */
-Router.route("/ModeTwo").post(ProtectedController,ModeTwo)
-/*Mode3 */
-Router.route("/ModeThree").post(ProtectedController,ModeThree)
+Router.route("/MODE").post(ProtectedController,Mode)
 
 module.exports=Router
 

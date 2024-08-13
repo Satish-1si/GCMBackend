@@ -1,4 +1,4 @@
-const ModeTwoModel = require("../../models/ModesSchema/ModeTwo.js");
+const AdminAddUsers = require("../../models/ModesSchema/AdminAddusers.js");
 const AsyncErrorHandler = require("../../utils/AsyncError.js");
 const CustomError = require("../../utils/CustomError.js");
 
@@ -35,13 +35,13 @@ module.exports.AddUser= AsyncErrorHandler(async (req, res, next) => {
 
 
     // Check if email already exists
-    const existingUser = await ModeTwoModel.findOne({ email:email });
+    const existingUser = await AdminAddUsers.findOne({ email:email });
     if (existingUser) {
         return next(new CustomError("Email already exists", 400));
     }
 
     // Create new admin
-    const newUser= new ModeTwoModel({
+    const newUser= new AdminAddUsers({
         ...req.body,CreateBy:"satishManepalli"
     });
 
