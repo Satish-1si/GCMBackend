@@ -1,3 +1,42 @@
 
-signUp    :- username || email || phoneNO            ====>(post)
-verify    :- Otp 
+/signup:-
+   * username 
+   * phone 
+   * email 
+/verify:- 
+   *otp 
+   ==> assign on mode_1
+
+/modes:- 
+   /mode1:- 
+       * username 
+       * phone 
+       * email 
+       * Allow permissions
+            => Audio Calls 
+            => Audio cofernce 
+            => Gsm Calls
+            => Veido Calls
+--------------------------------------------------------------------------
+/modes:- 
+    /mode2:- 
+       * username 
+       * phone 
+       * email 
+       * Extension 
+       * password
+       * conform password
+       * Allow permissions
+            => Audio Calls 
+            => Audio cofernce 
+            => Gsm Calls
+            => Veido Calls
+--------------------------------------------------------------------------
+
+
+              
+
+
+    
+      
+

@@ -1,8 +1,18 @@
+
+const GetErrorMessage=(err)=>{
+    if(err.code===11000){
+        return "Duplicate key Error !!!"
+    }
+    else{
+        return err.message
+    }
+     
+}
 module.exports=(err,req,res,next)=>{
-    console.log(err,"000000000000000000000000000000000===================================================================")
-    res.status(err.statusCode||500).json({
+    const ErrorMsg=GetErrorMessage(err) 
+    res.status(err.statusCode||404).json({
         status : err.status,
-        message: err.message,
+        message: ErrorMsg,
         stack  : err.stack,
         error  : err,
     });

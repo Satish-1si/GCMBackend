@@ -8,7 +8,7 @@ module.exports.VerifyOtpController = AsyncErrorHandler(async (req, res, next) =>
     const currentTime = moment();
     const otpCreateAt = moment(OTPCreateAt);
     const expiresInMinutes = currentTime.diff(otpCreateAt, "minutes");
-    if (expiresInMinutes <= 1) {
+    if (expiresInMinutes <= 3) {
         if (req.body.verifyOtp) {
             const userPostOtp =req.body.verifyOtp;
             if (DB_OTP !== userPostOtp) {
@@ -16,7 +16,21 @@ module.exports.VerifyOtpController = AsyncErrorHandler(async (req, res, next) =>
             } else {
                 let updatedUser = await AuthUser.findByIdAndUpdate(
                     req.user.id,
-                    { role: "MODE_ONE", sendOtp: { OTP: null, OTPCreateAt: null } },
+                    { 
+                      ActiveMode: "MODE_ONE",
+                      sendOtp: { OTP: null, OTPCreateAt: null },
+                      ModeDetails:{
+                        ModeOne:{
+                            AllowPermissions:{
+                                AudioCalls:false,
+                                AudioConference:false,
+                                GsmCalls:true,
+                                VideoCalls:false,
+                                Status:"active"
+                            }
+                       }
+                      }
+                     },
                     { new: true, runValidators: true }
                 );
                 res.status(200).json({

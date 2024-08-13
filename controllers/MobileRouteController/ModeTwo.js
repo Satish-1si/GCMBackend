@@ -6,10 +6,11 @@ const customError = require("../../utils/CustomError.js");
 const sendEmail = require("../../utils/Email.js");
 // * mode_2:- domainID && password
 module.exports.ModeTwo = AsyncErrorHadler(async (req, res, next) => {
-	if (req.body.DomainId) {
-		if (req.body.DomainPassword) {
-			if (req.user.role !== "MODE_TWO") {
-				let user = await AuthUser.findByIdAndUpdate(req.user.id,{ role: "MODE_TWO" },{ new: true, runValidators: true },);
+	//add modedetails @modeTwo
+	if (req.body.ExtensionNO) {
+		if (req.body.ExtensionPassword) {
+			if (req.user.ActiveMode !== "MODE_TWO") {
+				let user = await AuthUser.findByIdAndUpdate(req.user.id,{ ActiveMode: "MODE_TWO" },{ new: true, runValidators: true },);
 				if (!user) {
 					next(new customError("user Doesnt exist please Resister",404,));
 				}

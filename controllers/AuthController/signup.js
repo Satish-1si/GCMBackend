@@ -10,7 +10,7 @@ module.exports.SignupController = AsyncErrorHandler(async (req, res, next) => {
         // Generate OTP and create new user
         const OTPNO = GenerateOTP();
         const newUser = await AuthUser.create({ ...req.body, 
-                                                sendOtp:{OTP:OTPNO,OTPCreateAt:new Date()}
+                                                 sendOtp:{OTP:OTPNO,OTPCreateAt:new Date()}
                                              });
         if (newUser) {
             // Send OTP via email
@@ -46,3 +46,7 @@ module.exports.SignupController = AsyncErrorHandler(async (req, res, next) => {
 });
 
 
+
+
+
+ 

@@ -5,9 +5,12 @@ const mongoose=require("mongoose");
 const AllControllers=require("./controllers/MergeAllControllers.js")
 const CustomError=require("./utils/CustomError.js")
 const AuthRouter=require("./Routes/AuthRouter.js")
+const AdminRouter=require("./Routes/AdminRouter.js")
+const cors = require('cors');
+
 //convert binary data into json format --> add the req object
 server.use(Express.json());
-
+server.use(cors())
 
 //config the our local env file :-
 envpackage.config({path:"./config.env"})
@@ -16,8 +19,8 @@ envpackage.config({path:"./config.env"})
 /*Auth level Routes */
 server.use("/gcm",AuthRouter) /* eg:- ==> /gcm/signup */
 
-/*user level Routes */
-
+/*Admin level Routes */
+server.use("/Admin/GcmDialler",AdminRouter) /* eg:- ==> /gcm/signup */
 
 /*protected Routes */
 
@@ -42,7 +45,6 @@ mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: tru
     .catch((error) => {
         console.error("Connection to MongoDB failed:", error.message);
     });
-
 //start the server using env varibles :-
 const EnvData=process.env 
 if(EnvData.Node_Environment==="Development"){

@@ -18,7 +18,7 @@ Router.route("/signup").post(SignupController)
 Router.route("/verifyOtp").post(ProtectedController,VerifyOtpController)
 
 /*ReverifyRoute */
-Router.route("/reverifyOtp").post(ProtectedController,ReSendOtpController)
+Router.route("/resendOtp").post(ProtectedController,ReSendOtpController)
 
 /* login */
 Router.route("/login").post(ProtectedController,LoginController)
@@ -34,3 +34,5 @@ Router.route("/ModeTwo").post(ProtectedController,ModeTwo)
 Router.route("/ModeThree").post(ProtectedController,ModeThree)
 
 module.exports=Router
+
+

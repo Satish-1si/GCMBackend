@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const moment=require("moment")
 const Bcrypt=require("bcryptjs")
-const OTP_SCHEMA=require("./ModeModel")
+const OTP_SCHEMA=require("./OtpModel")
+const ModesSchema=require("./Mode")
 const userSchema = new mongoose.Schema({
     username: {type: String, required: true},
     email: {
@@ -25,15 +26,17 @@ const userSchema = new mongoose.Schema({
       type:OTP_SCHEMA,
       select:false
     },
-    role:{
+    ActiveMode:{
       type:String,
       validate: {
         validator: function(value) {
           return ["MODE_ONE","MODE_TWO","MODE_THREE"].includes(value);
         },
         message: "unKnow Mode !!! please verify!!!"
-      }
+      },
+      select:false
     },
+
   
   },{timestamps:true});
   
@@ -62,11 +65,11 @@ userSchema.methods.verifyTokenExpiredDate=async function(IssuedTokenDetails){
          
 }
 
-//comapre the Db password and userpostpassword
-userSchema.methods.comparePasswordInDb = async function(userPassword,DBpassword) {
-  return await Bcrypt.compare(userPassword, DBpassword);
-};
+
 
 const AuthUser = mongoose.model("UserAuthtication", userSchema);
 module.exports = AuthUser;
   
+
+
+
