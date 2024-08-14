@@ -8,19 +8,21 @@ const sendEmail = require("../../utils/Email.js");
 module.exports.SignupController = AsyncErrorHandler(async (req, res, next) => {
     try {
         // Generate OTP and create new user
-        const OTPNO = GenerateOTP();
+        const OTPNO = GenerateOTP(6);
         const newUser = await AuthUser.create({ ...req.body, 
                                                  sendOtp:{OTP:OTPNO,OTPCreateAt:new Date()}
                                              });
         if (newUser) {
-            // Send OTP via email
             const emailResponse = await sendEmail({
-                frommail: process.env.Email,
-                tomail: newUser.email,
-                subject: "Welcome to GCM Dialler!",
-                textmsg: "One Time Password (OTP)",
-                userName: newUser.username,
-                userotp: OTPNO
+                frommail:process.env.Email,
+                tomail  :newUser.email,
+                subject :"Welcome to GCM Dialler!",
+                textmsg :"One Time Password (OTP)",
+                userName:newUser.username,
+                userotp :OTPNO,
+                type    :"verifyOtp",
+                data    :newUser
+
             });
 
             if (emailResponse?.status === "success") {
@@ -34,10 +36,12 @@ module.exports.SignupController = AsyncErrorHandler(async (req, res, next) => {
                     token: SignToken(payload),
                     data: newUser
                 });
-            } else {
+            } 
+            else {
                 return next(new CustomError(emailResponse.message, 404));
             }
-        } else {
+        } 
+        else {
             return next(new CustomError("User creation failed", 404));
         }
     } catch (error) {

@@ -18,7 +18,7 @@ const AdminAddUsersSchema = new mongoose.Schema({
   PhoneNumber: { type: String, required: true },
   ExtensionNo: {
     type: Number,
-    default: null,
+    unique:true,
     required: [true, "ExtensionNo required!!!"]
   },
   password: {
@@ -47,6 +47,6 @@ const AdminAddUsersSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-const AdminAddUsers = mongoose.model("ModeTwo", AdminAddUsersSchema);
+const AdminAddUsers = mongoose.model("AdminGenerateUsers", AdminAddUsersSchema);
 module.exports = AdminAddUsers;
 

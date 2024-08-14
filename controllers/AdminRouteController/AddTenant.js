@@ -14,7 +14,7 @@ module.exports.AddTenant = AsyncErrorHandler(async (req, res, next) => {
     }
 
     // Create a new tenant using the TenantRole model
-    const CreateTenant = await TenantRole.create({ ...req.body });
+    const CreateTenant = await TenantRole.create({...req.body });
     console.log(CreateTenant)
 
     // Send a successful response with the created tenant data

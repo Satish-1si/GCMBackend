@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
       type:OTP_SCHEMA,
       select:false
     },
+    PhoneNumber:{ 
+      type: String,
+    },
     ActiveMode:{
        type:String
     }
@@ -43,7 +46,7 @@ userSchema.pre("save",async function (next){
          catch(err){
             next(err)
          }
-  })
+})
 
 //verify the Token 
 userSchema.methods.verifyTokenExpiredDate=async function(IssuedTokenDetails){
@@ -54,10 +57,7 @@ userSchema.methods.verifyTokenExpiredDate=async function(IssuedTokenDetails){
         return (CountDays<=1)
          
 }
-
-
-
-const AuthUser = mongoose.model("UserAuthtication", userSchema);
+const AuthUser = mongoose.model("userResgistry", userSchema);
 module.exports = AuthUser;
   
 
