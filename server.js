@@ -23,7 +23,6 @@ server.use('/gcm', AuthRouter); /* eg:- ==> /gcm/signup */
 server.use('/Admin/GcmDialler', AdminRouter); /* eg:- ==> /gcm/signup */
 
 /* Protected Routes */
-
 /*************************************************************************** */
 // Catch-all route for handling unknown routes
 server.use('*', (req, res, next) => {
@@ -48,7 +47,11 @@ mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: tru
 
 
 const serverReference = server.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
+    console.log("**********************server configrations ******************************")
+      console.log(`Server running on port ${process.env.PORT}`);
+      console.log(`Envirnoment stage :- ${process.env.NODE_ENV}`)
+    console.log("**************************************************************************")
+
 });
 
 // Handle unhandled promise rejections
