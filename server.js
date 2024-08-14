@@ -46,7 +46,7 @@ mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: tru
     });
 
 
-const serverReference = server.listen(process.env.PORT, () => {
+const serverReference = server.listen(process.env.PORT||9001, () => {
     console.log("**********************server configrations ******************************")
       console.log(`Server running on port ${process.env.PORT}`);
       console.log(`Envirnoment stage :- ${process.env.NODE_ENV}`)
