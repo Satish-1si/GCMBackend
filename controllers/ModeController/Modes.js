@@ -55,6 +55,9 @@ module.exports.Mode = AsyncErrorHadler(async (req, res, next) => {
 					AllowPermissions: ValidateUser?.AllowPermissions
 				});
 			}
+			else {
+				next(new customError("Please contact support Team, you don't have permissions !!!", 404));
+			}
 
 	     }
 	     else {
