@@ -40,7 +40,8 @@ module.exports.Mode = AsyncErrorHadler(async (req, res, next) => {
 			} else {
 				next(new customError("Please enter the ExtensionPassword !!!", 404));
 			}
-		} else {
+		} 
+		else {
 			next(new customError("Please enter the ExtensionNO !!!", 404));
 		}
 	} else if (RequestMode === "MODETHREE") {

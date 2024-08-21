@@ -6,6 +6,8 @@ const AllControllers = require('./controllers/MergeAllControllers.js');
 const CustomError = require('./utils/CustomError.js');
 const AuthRouter = require('./Routes/AuthRouter.js');
 const AdminRouter = require('./Routes/AdminRouter.js');
+const UserRouter  = require('./Routes/userRoute.js');
+
 const cors = require('cors');
 
 // Convert binary data into JSON format --> add the req object
@@ -18,6 +20,11 @@ dotenv.config({ path: './config.env' });
 /******************************** Configure the Routes **********************/
 /* Auth level Routes */
 server.use('/gcm', AuthRouter); /* eg:- ==> /gcm/signup */
+
+
+/* user level Routes */
+server.use('/gcm', UserRouter); /* eg:- ==> /gcm/UpdateUserDetails */
+
 
 /* Admin level Routes */
 server.use('/Admin/GcmDialler', AdminRouter); /* eg:- ==> /gcm/signup */
@@ -48,8 +55,8 @@ mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: tru
 
 const serverReference = server.listen(process.env.PORT||9001, () => {
     console.log("**********************server configrations ******************************")
-      console.log(`Server running on port ${process.env.PORT}`);
-      console.log(`Envirnoment stage :- ${process.env.NODE_ENV}`)
+      console.log(`Server running on port ~ http://localhost:${process.env.PORT}`);
+      console.log(`Envirnoment stage ~ ${process.env.NODE_ENV}`)
     console.log("**************************************************************************")
 });
 

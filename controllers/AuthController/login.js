@@ -8,6 +8,7 @@ module.exports.LoginController=AsyncErrorHadler(async(req,res,next)=>{
     if(!(req.body.email)){
         next(new CustomError("please enter the email",404))
     }
+    console.log(user)
     if(!user){
        next(new CustomError("user Doesnt exist please Register and again",404))
     }

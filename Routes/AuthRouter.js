@@ -1,11 +1,11 @@
 const Express=require("express")
 const Router=Express.Router()
 const AllControllers=require("../controllers/MergeAllControllers.js")
+const {ProtectedController}=require("../middleware/AuthenticationMiddleware.js")
 const {
         SignupController,
         LoginController,
         VerifyOtpController,
-        ProtectedController,
         ForgetPasswordController,
         ReSendOtpController,
         Mode
@@ -26,7 +26,7 @@ Router.route("/login").post(LoginController)
 /* ForgetPassword */
 Router.route("/forgetPassword").post(ProtectedController,ForgetPasswordController)
 
-/*Mode1 */
+/*MODE 1,2,3 ==> all Mode api  */
 Router.route("/MODE").post(ProtectedController,Mode)
 
 module.exports=Router

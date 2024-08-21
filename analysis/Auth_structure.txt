@@ -69,7 +69,7 @@ Today working on
 
 
 /**************************************************signup***********************************/
-curl --location 'http://localhost:3500/gcm/signup' \
+curl --location 'https://gcm-cldtg2ha.b4a.run/gcm/signup' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzU5OCwiZXhwIjoxNzIxMzk5OTk4fQ._TjRfRlPCYDOIEQFs0BT8yswS0CyGmHtjfcCRmv0sOg' \
 --data-raw '{
@@ -95,7 +95,7 @@ curl --location 'http://localhost:3500/gcm/signup' \
 }
 /****************************************************VerifyOtp*********************************/
 
-curl --location 'http://localhost:3500/gcm/verifyOtp' \
+curl --location 'https://gcm-cldtg2ha.b4a.run/gcm/verifyOtp' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzU5OCwiZXhwIjoxNzIxMzk5OTk4fQ._TjRfRlPCYDOIEQFs0BT8yswS0CyGmHtjfcCRmv0sOg' \
 --data '{
@@ -114,7 +114,7 @@ curl --location 'http://localhost:3500/gcm/verifyOtp' \
     }
 }
 /**************************************************login***********************************/
-curl --location 'http://localhost:3500/gcm/login' \
+curl --location 'https://gcm-cldtg2ha.b4a.run/gcm/login' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzU5OCwiZXhwIjoxNzIxMzk5OTk4fQ._TjRfRlPCYDOIEQFs0BT8yswS0CyGmHtjfcCRmv0sOg' \
 --data-raw '{
@@ -137,7 +137,7 @@ curl --location 'http://localhost:3500/gcm/login' \
     }
 }
 /**************************************************mode-1,2,3***********************************/
-curl --location --request POST 'http://localhost:3500/gcm/ModeThree' \
+curl --location --request POST 'https://gcm-cldtg2ha.b4a.run/gcm/ModeThree' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTkyOTNiZmI1YzlhOWIxZjg0N2Q2MiIsImlhdCI6MTcyMTMxMzk1NiwiZXhwIjoxNzIxNDAwMzU2fQ.eyh75KzBImo1KDeXp6K_DKvT1sMehQ0HmzZGYT_RU4Y'
 
 {

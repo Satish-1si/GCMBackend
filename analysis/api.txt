@@ -32,9 +32,45 @@
             => Gsm Calls
             => Veido Calls
 --------------------------------------------------------------------------
+Rooms :- 
+      user-1
+      user-2
+      user-3 
+      user-4 
+      
 
 
-              
+        [Namespace: Maths]          [Namespace: Physics]
+              |                             |
+              |                             |
+        [Room 1: Algebra]            [Room 2: Quantum]
+              |                             |
+        +-----+-----+                     +-----+
+        |           |                     |     |
+    [User 1]    [User 2]             [User 3] [User 4]
+   
+ //const maths=IO.of("/Maths) ==>namespace create
+    {
+      maths:{}
+    }
+//maths.join(Algebra) ==> create room
+   {
+      maths:{
+         Algebra:{
+                  
+                }
+       }
+    }
+User 1 --> ?
+
+   {
+      maths:{
+         Algebra:{
+                   Joiners:[]
+                }
+       }
+    }
+
 
 
     
