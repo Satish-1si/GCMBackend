@@ -4,7 +4,7 @@ const CustomError = require("../../utils/CustomError");
 const SignToken=require("../../utils/signToken.js")
 
 module.exports.LoginController=AsyncErrorHadler(async(req,res,next)=>{
-    let user=await AuthUser.findOne({email:req.body.email}).select("+password");
+    let user=await AuthUser.findOne({email:req.body.email}).select("+email").select("+password");
     if(!(req.body.email)){
         next(new CustomError("please enter the email",404))
     }

@@ -43,7 +43,6 @@ module.exports.UpdateUserDetailsController = AsyncErrorHandler(async (req, res, 
     //     }
     // }
 
-    // Handle username update
     if(email){
         req.user.email=email
         await req.user.save()

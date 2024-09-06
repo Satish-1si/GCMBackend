@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
       lowercase: true,
       unique: true,
       required: true,
+      select:false,
       validate: {
         validator: function(msg) {
           return /^[a-z . 0-9]*@gmail.com$/.test(msg);

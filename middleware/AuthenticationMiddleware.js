@@ -30,7 +30,7 @@ module.exports.ProtectedController = AsyncErrorHandler(async (req, res, next) =>
     }
     
     
-    const UserDoc = await AuthUser.findById(UserTokenDetails.id).select("+role").select("+sendOtp");
+    const UserDoc = await AuthUser.findById(UserTokenDetails.id).select("+email").select("+role").select("+sendOtp");
     if (!UserDoc) {
         return next(new CustomError("Please register user not found!!!", 404));
     }
