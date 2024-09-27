@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema({
     },
     ActiveMode:{
        type:String
-    }
+    },
+    ExtensionNO:{type:String}
 },{timestamps:true});
   
 //Hash the ==> new || modied passwords

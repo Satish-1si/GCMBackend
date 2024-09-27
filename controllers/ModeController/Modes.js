@@ -7,13 +7,12 @@ const AuthUser = require("../../models/AuthModel");
 
 module.exports.Mode = AsyncErrorHadler(async (req, res, next) => {
 	const { RequestMode, ExtensionNO, ExtensionPassword } = req.body;
-	/*Get Specific Mode user get the userRegistry */
-	let GetAllUsers = await AuthUser.find({$and:{ActiveMode: { $eq: RequestMode }}});
 
 	if (RequestMode === "MODEONE") {
 		 
 		/*All type of users avalible ==> @ registration time*/
 		req.user.ActiveMode = "MODEONE";
+		req.user.ExtensionNO=null
 		await req.user.save();
         /*Get ModeOne users */
 		let GetAllModeOneUsers = await AuthUser.find({$and:{ActiveMode: { $eq: RequestMode }}});
@@ -44,11 +43,13 @@ module.exports.Mode = AsyncErrorHadler(async (req, res, next) => {
 					password: ExtensionPassword,
 					   email:req.user.email
 				});
+				
 				/*get All MODETWO users*/
 				let GetAllModeTwoUsers = await AddAdminUsers.find( {ExtensionNo:{$ne: ExtensionNO*1}});
 			
 				if (ValidateUser) {
 					req.user.ActiveMode = "MODETWO";
+					req.user.ExtensionNO= ExtensionNO
 					await req.user.save();
 					res.status(200).json({
 						status: "success",
@@ -73,12 +74,11 @@ module.exports.Mode = AsyncErrorHadler(async (req, res, next) => {
 			let ValidateUser = await ServerGenerateUsers.findOne({ExtensionNo:ExtensionNO,email:req.user.email});
 			/*get All modeThree users */
 			let GetAllModeThreeUsers = await ServerGenerateUsers.find({ExtensionNo:{$ne: ExtensionNO*1}});
-			console.log(GetAllModeThreeUsers.length)
 
 			if(ValidateUser){
 				req.user.ActiveMode = "MODETHREE";
+				req.user.ExtensionNO= ExtensionNO
 				await req.user.save();
-				
 				res.status(200).json({
 					status: "success",
 					UserMail: req.user.email,
