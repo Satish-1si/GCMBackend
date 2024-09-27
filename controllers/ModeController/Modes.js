@@ -73,14 +73,16 @@ module.exports.Mode = AsyncErrorHadler(async (req, res, next) => {
 			let ValidateUser = await ServerGenerateUsers.findOne({ExtensionNo:ExtensionNO,email:req.user.email});
 			/*get All modeThree users */
 			let GetAllModeThreeUsers = await ServerGenerateUsers.find({ExtensionNo:{$ne: ExtensionNO*1}});
+			console.log(GetAllModeThreeUsers.length)
 
 			if(ValidateUser){
 				req.user.ActiveMode = "MODETHREE";
 				await req.user.save();
+				
 				res.status(200).json({
 					status: "success",
-					data: req.user,
-					AllowPermissions: ValidateUser?.AllowPermissions,
+					UserMail: req.user.email,
+					AllowPermissions: ValidateUser,
 					ModeThreeUsers:GetAllModeThreeUsers
 				});
 			}

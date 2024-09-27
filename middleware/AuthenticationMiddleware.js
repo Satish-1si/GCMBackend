@@ -9,6 +9,7 @@ const util = require("util");
 module.exports.ProtectedController = AsyncErrorHandler(async (req, res, next) => {
     
     const authorizationHeader = req.headers.authorization;
+    console.log(authorizationHeader)
     if (!authorizationHeader || !authorizationHeader.startsWith("Bearer ")) {
         return next(new CustomError("Authorization required!!! Token undefined", 401));
     }
