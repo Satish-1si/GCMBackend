@@ -7,7 +7,8 @@ const CustomError = require('./utils/CustomError.js');
 const AuthRouter = require('./Routes/AuthRouter.js');
 const AdminRouter = require('./Routes/AdminRouter.js');
 const UserRouter  = require('./Routes/userRoute.js');
-
+const { getIO, initIO } = require('./controllers/sockets/socket.js');
+const { createServer } = require('http');
 const cors = require('cors');
 
 // Convert binary data into JSON format --> add the req object
@@ -16,6 +17,8 @@ server.use(cors());
 
 // Configure the local env file
 dotenv.config({ path: './config.env' });
+
+
 
 /******************************** Configure the Routes **********************/
 /* Auth level Routes */
@@ -40,6 +43,8 @@ server.use('*', (req, res, next) => {
 // General error-handling middleware
 server.use(AllControllers?.GlobalErrorController);
 
+
+
 // Ensure that the connection string is correctly set in your environment variables
 const connectionStr = process.env.Connection_Str;
 
@@ -59,6 +64,9 @@ const serverReference = server.listen(process.env.PORT||9001, () => {
       console.log(`Envirnoment stage ~ ${process.env.NODE_ENV}`)
     console.log("**************************************************************************")
 });
+/*Handle sockets ==> veido calls */
+initIO(server);
+getIO();
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
