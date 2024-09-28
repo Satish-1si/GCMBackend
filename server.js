@@ -59,12 +59,16 @@ mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: tru
         console.error('Connection to MongoDB failed:', error.message);
     });
 
-/*Handle sockets ==> veido calls */
-let insta=createServer(server)
-initIO(insta)
 
 
-const serverReference = server.listen(process.env.PORT||9001, () => {
+// Create an HTTP server by wrapping the Express server
+let httpServer = createServer(server);
+
+// Initialize Socket.IO with the HTTP server
+initIO(httpServer);
+
+
+const serverReference = httpServer.listen(process.env.PORT||9001, () => {
     console.log("**********************server configrations ******************************")
       console.log(`Server running on port ~ http://localhost:${process.env.PORT}`);
       console.log(`Envirnoment stage ~ ${process.env.NODE_ENV}`)
