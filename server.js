@@ -11,6 +11,8 @@ const { getIO, initIO } = require('./controllers/sockets/socket.js');
 const { createServer } = require('http');
 const cors = require('cors');
 
+
+
 // Convert binary data into JSON format --> add the req object
 server.use(express.json());
 server.use(cors());
@@ -57,6 +59,10 @@ mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: tru
         console.error('Connection to MongoDB failed:', error.message);
     });
 
+/*Handle sockets ==> veido calls */
+let insta=createServer(server)
+initIO(insta)
+
 
 const serverReference = server.listen(process.env.PORT||9001, () => {
     console.log("**********************server configrations ******************************")
@@ -64,8 +70,7 @@ const serverReference = server.listen(process.env.PORT||9001, () => {
       console.log(`Envirnoment stage ~ ${process.env.NODE_ENV}`)
     console.log("**************************************************************************")
 });
-/*Handle sockets ==> veido calls */
-initIO(server);
+
 getIO();
 
 // Handle unhandled promise rejections
